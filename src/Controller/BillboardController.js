@@ -27,7 +27,7 @@ const helper = async () => {
 
 export const getHot100 = async (req, res) => {
   try {
-    const email = helper();
+    const email = await helper();
     res.send(email);
   } catch (error) {
     console.log(error);
@@ -37,9 +37,10 @@ export const getHot100 = async (req, res) => {
 
 const updateChart = async () => {
   try {
-    helper();
+    await helper();
   } catch (error) {
     console.log(error);
   }
 };
-setInterval(updateChart, 10 * 60 * 1000);
+updateChart();
+setInterval(updateChart, 60 * 60 * 1000);
