@@ -6,11 +6,12 @@ import express from "express";
 // import { getHot100 } from "./Controller/BillboardController.js";
 import router from "./Router/router.js";
 const app = express();
-app.listen(3000, () => {
-  console.log("Server running on port 3000");
+const port = process.env.PORT || 8080;
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
 });
 app.use("/", router);
-
+// console.log(process.env.PORT);
 // getHot100(app, transporter);
 // let lastWeek = "";
 
