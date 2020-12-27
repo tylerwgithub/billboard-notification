@@ -1,0 +1,22 @@
+{
+  "name": "billboard-notification",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "npm test"
+  },
+  "author": "Tongyu",
+  "license": "ISC",
+  "dependencies": {
+    "billboard-top-100": "^2.5.9",
+    "express": "^4.17.1",
+    "moment-timezone": "^0.5.32",
+    "nodemailer": "^6.4.17"
+  },
+  "type": "module",
+  "devDependencies": {
+    "eslint": "^7.16.0"
+  }
+}
