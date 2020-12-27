@@ -4,7 +4,7 @@ import moment from "moment-timezone";
 export const getHot100Api = async () => {
   let date = moment(new Date()).tz("America/New_York").format("YYYY-MM-DD");
   const res = new Promise((resolve, reject) => {
-    billboard.getChart("hot-100", "2020-12-27", (err, chart) => {
+    billboard.getChart("hot-100", date, (err, chart) => {
       console.log(
         "getHot100Api was called",
         date,

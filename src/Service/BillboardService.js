@@ -13,6 +13,6 @@ export const getHot100Service = async () => {
       const element = `<tr><td>${cur}</td></tr>`;
       return acc + element;
     });
-  email = "<table>" + email + "</table>";
+  email = `<table><tr><td>${"Week of " + chart.week}</td></tr>${email}</table>`;
   return { email, thisWeek };
 };
