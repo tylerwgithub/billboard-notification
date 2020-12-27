@@ -42,4 +42,4 @@ const updateChart = async () => {
     console.log(error);
   }
 };
-setInterval(updateChart, 10 * 1000);
+setInterval(updateChart, 10 * 60 * 1000);
