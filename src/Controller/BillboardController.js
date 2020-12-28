@@ -46,4 +46,4 @@ const updateChart = async () => {
   }
 };
 updateChart();
-setInterval(updateChart, 60 * 60 * 1000);
+setInterval(updateChart, 10 * 1000);
