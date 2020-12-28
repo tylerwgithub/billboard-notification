@@ -23,6 +23,12 @@ const helper = async () => {
     });
     console.log("Chart Updated", sentEmail, thisWeek);
   } else {
+    await transporter.sendMail({
+      from: '"Tongyu Tech" <tongyutest@gmail.com>', // sender address
+      to: "tyelsr@gmail.com", // list of receivers
+      subject: "No Update from Tongyu Tech", // Subject line
+      html: email, // html body
+    });
     console.log("No Update", thisWeek);
   }
   return email;
@@ -42,9 +48,15 @@ const updateChart = async () => {
   try {
     await helper();
   } catch (error) {
+    await transporter.sendMail({
+      from: '"Tongyu Tech" <tongyutest@gmail.com>', // sender address
+      to: "tyelsr@gmail.com", // list of receivers
+      subject: "Error from Tongyu Tech", // Subject line
+      html: error, // html body
+    });
     console.log(error);
   }
   // setTimeout(updateChart, 20 * 1000);
 };
 updateChart();
-setInterval(updateChart, 60 * 60 * 1000);
+setInterval(updateChart, 30 * 60 * 1000);
