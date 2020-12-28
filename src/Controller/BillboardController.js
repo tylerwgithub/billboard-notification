@@ -12,10 +12,13 @@ const helper = async () => {
   const { email, thisWeek } = await getHot100Service();
   if (lastWeek != thisWeek) {
     lastWeek = thisWeek;
+    const recipients = process.env.RECIPIENTS
+      ? process.env.RECIPIENTS
+      : "tyelsr@gmail.com";
     const sentEmail = await transporter.sendMail({
-      from: '"Tongyu Wang Tech" <tongyutest@gmail.com>', // sender address
-      to: "tyelsr@gmail.com", // list of receivers
-      subject: "Billboard Update Test", // Subject line
+      from: '"Tongyu Tech" <tongyutest@gmail.com>', // sender address
+      to: recipients, // list of receivers
+      subject: "Billboard Update from Tongyu Tech", // Subject line
       html: email, // html body
     });
     console.log("Chart Updated", sentEmail, thisWeek);
@@ -28,10 +31,10 @@ const helper = async () => {
 export const getHot100 = async (req, res) => {
   try {
     const email = await helper();
-    res.send(email);
+    res.json(email);
   } catch (error) {
     console.log(error);
-    res.send(error);
+    res.json(error);
   }
 };
 
@@ -42,5 +45,5 @@ const updateChart = async () => {
     console.log(error);
   }
 };
-// updateChart();
+updateChart();
 setInterval(updateChart, 60 * 60 * 1000);
