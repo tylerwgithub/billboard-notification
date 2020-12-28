@@ -44,6 +44,7 @@ const updateChart = async () => {
   } catch (error) {
     console.log(error);
   }
+  // setTimeout(updateChart, 20 * 1000);
 };
 updateChart();
-setInterval(updateChart, 10 * 1000);
+setInterval(updateChart, 60 * 60 * 1000);
