@@ -56,7 +56,11 @@ export const createUser = async (req, res) => {
           "Thanks for your subscription! Here's the chart for current week.";
         sendEmail(email, subject, chart.email);
         console.log("A New User was Created: ", email);
-        sendEmail("tyelsr@gmail.com", `New User: ${email}`, "Haha");
+        sendEmail(
+          "tyelsr@gmail.com",
+          `New User: ${email}`,
+          `New User: ${email}`
+        );
         res.send("Thanks for your subscription!");
       } else res.send("You are already subscribed!");
     }
