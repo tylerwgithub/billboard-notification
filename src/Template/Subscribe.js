@@ -11,7 +11,7 @@ export const getSubscribe = () => {
           id="contact"
           style="text-align: center"
         >
-        <h2>Subscribe to Music Feed</h2>
+        <h2>Get BB100 update everyweek for free</h2>
           <form
             action="https://apakee.com/user"
             target="_blank"
