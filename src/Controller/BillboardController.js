@@ -48,10 +48,15 @@ export const createUser = async (req, res) => {
     else {
       const createdUser = await createUserService(email);
       if (createdUser) {
+        const date = moment(new Date())
+          .tz("America/New_York")
+          .format("YYYY-MM-DD");
+        const { emailTemplate, thisWeek } = await getHot100Service(date);
+        const subject =
+          "Thanks for your subscription! Here's the chart for current week.";
+        sendEmail(email, subject, emailTemplate);
         console.log("A New User was Created: ", email);
-        const recipients = "tyelsr@gmail.com";
-        const subject = `New User: ${email}`;
-        sendEmail(recipients, subject, "Haha");
+        sendEmail("tyelsr@gmail.com", `New User: ${email}`, "Haha");
         res.send("Thanks for your subscription!");
       } else res.send("You are already subscribed!");
     }
