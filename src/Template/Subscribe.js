@@ -16,7 +16,7 @@ export const getSubscribe = () => {
             action="https://tongyu-tech-dwhz2kmwca-uc.a.run.app/user"
             target="_blank"
           >
-            <p style="padding: 50px 50px 50px 50px">
+            <p style="padding: 50px 5% 50px 5%">
               <input
                 style="text-align: center"
                 class="w3-input w3-padding-16"
