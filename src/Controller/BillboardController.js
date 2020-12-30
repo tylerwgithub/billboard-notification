@@ -47,11 +47,13 @@ export const createUser = async (req, res) => {
     if (!email) throw new Error();
     else {
       const createdUser = await createUserService(email);
-      console.log("New User was Created: ", createdUser);
-      const recipients = "tyelsr@gmail.com";
-      const subject = `New User: ${email}`;
-      sendEmail(recipients, subject, "Haha");
-      res.send(createdUser);
+      if (createdUser) {
+        console.log("A New User was Created: ", email);
+        const recipients = "tyelsr@gmail.com";
+        const subject = `New User: ${email}`;
+        sendEmail(recipients, subject, "Haha");
+        res.send("Thanks for your subscription!");
+      } else res.send("You are already subscribed!");
     }
   } catch (error) {
     console.log("Fail to create user: ", error);
