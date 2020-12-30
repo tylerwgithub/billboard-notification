@@ -1,0 +1,39 @@
+export const getSubscribe = () => {
+  return `<!DOCTYPE html>
+    <html>
+      <title>Subscribe</title>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+      <body>
+        <div
+          class="w3-container w3-padding-64"
+          id="contact"
+          style="text-align: center"
+        >
+        <h2>Subscribe to Music Feed</h2>
+          <form
+            action="https://tongyu-tech-dwhz2kmwca-uc.a.run.app/user"
+            target="_blank"
+          >
+            <p style="padding: 50px 50px 50px 50px">
+              <input
+                style="text-align: center"
+                class="w3-input w3-padding-16"
+                type="string"
+                placeholder="Please enter your email address"
+                required
+                name="email"
+              />
+            </p>
+            <p>
+              <button class="w3-button w3-light-grey w3-section" type="submit">
+                Subscribe
+              </button>
+            </p>
+          </form>
+        </div>
+      </body>
+    </html>
+    `;
+};

@@ -13,9 +13,9 @@ export const createUserService = async (email) => {
       console.log(
         `${createdUser.insertedCount} documents were inserted with the _id: ${createdUser.insertedId}`
       );
-      return createdUser;
+      return "Thanks for your subscription!";
     }
-    return "User already Exist!";
+    return "You are already subscribed!";
   } finally {
     // await client.close();
   }
