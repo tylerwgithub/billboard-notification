@@ -13,6 +13,7 @@
     "billboard-top-100": "^2.5.9",
     "express": "^4.17.1",
     "moment-timezone": "^0.5.32",
+    "mongodb": "^3.6.3",
     "nodemailer": "^6.4.17"
   },
   "type": "module",

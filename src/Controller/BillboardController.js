@@ -1,5 +1,10 @@
 import { getHot100Service } from "../Service/BillboardService.js";
 import nodemailer from "nodemailer";
+import {
+  getAllEmailsService,
+  createUserService,
+} from "../Service/DatabaseService.js";
+
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -12,13 +17,11 @@ const helper = async () => {
   const { email, thisWeek } = await getHot100Service();
   if (lastWeek != thisWeek) {
     lastWeek = thisWeek;
-    const recipients = process.env.RECIPIENTS
-      ? process.env.RECIPIENTS
-      : "tyelsr@gmail.com";
+    const recipients = await getAllEmailsService();
     const sentEmail = await transporter.sendMail({
       from: '"Tongyu Tech" <tongyutest@gmail.com>', // sender address
-      to: recipients, // list of receivers
-      subject: "Billboard Update from Tongyu Tech", // Subject line
+      to: recipients ? recipients : "tyelsr@gmail.com", // list of receivers
+      subject: "Music Feed from Tongyu Tech", // Subject line
       html: email, // html body
     });
     console.log("Chart Updated", sentEmail, thisWeek);
@@ -37,10 +40,31 @@ const helper = async () => {
 export const getHot100 = async (req, res) => {
   try {
     const email = await helper();
-    res.json(email);
+    res.send(email);
   } catch (error) {
+    await transporter.sendMail({
+      from: '"Tongyu Tech" <tongyutest@gmail.com>', // sender address
+      to: "tyelsr@gmail.com", // list of receivers
+      subject: "Error from Tongyu Tech", // Subject line
+      html: error, // html body
+    });
     console.log(error);
-    res.json(error);
+    res.send(error);
+  }
+};
+
+export const createUser = async (req, res) => {
+  try {
+    const { email } = req.query;
+    if (!email) throw new Error();
+    else {
+      const createdUser = await createUserService({ email: email });
+      console.log("New User was Created: ", createdUser);
+      res.send(createdUser);
+    }
+  } catch (error) {
+    console.log("Fail to create user: ", error);
+    res.send(error);
   }
 };
 
@@ -56,7 +80,6 @@ const updateChart = async () => {
     });
     console.log(error);
   }
-  // setTimeout(updateChart, 20 * 1000);
 };
-updateChart();
-setInterval(updateChart, 30 * 60 * 1000);
+// updateChart();
+// setInterval(updateChart, 30 * 60 * 1000);
