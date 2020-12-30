@@ -13,7 +13,7 @@ export const getSubscribe = () => {
         >
         <h2>Subscribe to Music Feed</h2>
           <form
-            action="https://tongyu-tech-dwhz2kmwca-uc.a.run.app/user"
+            action="https://apakee.com/user"
             target="_blank"
           >
             <p style="padding: 50px 5% 50px 5%">
