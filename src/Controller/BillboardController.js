@@ -51,10 +51,10 @@ export const createUser = async (req, res) => {
         const date = moment(new Date())
           .tz("America/New_York")
           .format("YYYY-MM-DD");
-        const { emailTemplate, thisWeek } = await getHot100Service(date);
+        const chart = await getHot100Service(date);
         const subject =
           "Thanks for your subscription! Here's the chart for current week.";
-        sendEmail(email, subject, emailTemplate);
+        sendEmail(email, subject, chart.email);
         console.log("A New User was Created: ", email);
         sendEmail("tyelsr@gmail.com", `New User: ${email}`, "Haha");
         res.send("Thanks for your subscription!");
