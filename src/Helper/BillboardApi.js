@@ -1,8 +1,6 @@
 import billboard from "billboard-top-100";
-import moment from "moment-timezone";
 
-export const getHot100Api = async () => {
-  let date = moment(new Date()).tz("America/New_York").format("YYYY-MM-DD");
+export const getHot100Api = async (date) => {
   const res = new Promise((resolve, reject) => {
     billboard.getChart("hot-100", date, (err, chart) => {
       console.log(

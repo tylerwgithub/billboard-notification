@@ -1,20 +1,23 @@
 import { getDB } from "../Helper/dbConnection.js";
 const client = getDB();
-
-const doc = { email: "wangtongyuu@hotmail.com" };
-
-export const createUserService = async (userEmail) => {
+console.log(client);
+export const createUserService = async (email) => {
   try {
     if (!client.isConnected()) await client.connect();
     const database = client.db("music-feed");
     const collection = database.collection("user");
-    const createdUser = await collection.insertOne(userEmail);
-    console.log(
-      `${createdUser.insertedCount} documents were inserted with the _id: ${createdUser.insertedId}`
-    );
-    return createdUser;
+    const query = { email: email };
+    const res = await collection.findOne(query);
+    if (!res) {
+      const createdUser = await collection.insertOne(query);
+      console.log(
+        `${createdUser.insertedCount} documents were inserted with the _id: ${createdUser.insertedId}`
+      );
+      return createdUser;
+    }
+    return "User already Exist!";
   } finally {
-    await client.close();
+    // await client.close();
   }
 };
 
@@ -27,7 +30,29 @@ export const getAllEmailsService = async () => {
     const stringEmails = emails.toString();
     return stringEmails;
   } finally {
-    await client.close();
+    // await client.close();
   }
 };
+
+export const createWeekService = async (week) => {
+  try {
+    if (!client.isConnected()) await client.connect();
+    const database = client.db("music-feed");
+    const collection = database.collection("chart");
+    const query = { week: week };
+    // const createdUser = await collection.insertOne(query);
+    const res = await collection.findOne(query);
+    if (!res) {
+      const createdWeek = await collection.insertOne(query);
+      console.log(
+        `${createdWeek.insertedCount} documents were inserted with the _id: ${createdWeek.insertedId}`
+      );
+      return true;
+    }
+    return false;
+  } finally {
+    // await client.close();
+  }
+};
+// createWeekService("1223");
 // getAllEmails();

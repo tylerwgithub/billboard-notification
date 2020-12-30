@@ -1,38 +1,28 @@
 import { getHot100Service } from "../Service/BillboardService.js";
-import nodemailer from "nodemailer";
 import {
   getAllEmailsService,
   createUserService,
+  createWeekService,
 } from "../Service/DatabaseService.js";
+import { sendEmail } from "../Service/EmailService.js";
+import moment from "moment-timezone";
 
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: "tongyutest@gmail.com",
-    pass: "20201226",
-  },
-});
-let lastWeek = "";
 const helper = async () => {
-  const { email, thisWeek } = await getHot100Service();
-  if (lastWeek != thisWeek) {
-    lastWeek = thisWeek;
+  const date = moment(new Date()).tz("America/New_York").format("YYYY-MM-DD");
+  const { email, thisWeek } = await getHot100Service(date);
+  const isWeekCreated = await createWeekService(thisWeek);
+  if (isWeekCreated) {
+    const subject = "Music Feed from Tongyu Tech";
     const recipients = await getAllEmailsService();
-    const sentEmail = await transporter.sendMail({
-      from: '"Tongyu Tech" <tongyutest@gmail.com>', // sender address
-      to: recipients ? recipients : "tyelsr@gmail.com", // list of receivers
-      subject: "Music Feed from Tongyu Tech", // Subject line
-      html: email, // html body
-    });
-    console.log("Chart Updated", sentEmail, thisWeek);
+    const sentEmail = await sendEmail(recipients, subject, email);
+    console.log(
+      "Chart Updated, current week: ",
+      thisWeek,
+      isWeekCreated,
+      sentEmail
+    );
   } else {
-    await transporter.sendMail({
-      from: '"Tongyu Tech" <tongyutest@gmail.com>', // sender address
-      to: "tyelsr@gmail.com", // list of receivers
-      subject: "No Update from Tongyu Tech", // Subject line
-      html: email, // html body
-    });
-    console.log("No Update", thisWeek);
+    console.log("No Update, current week: ", thisWeek, isWeekCreated);
   }
   return email;
 };
@@ -42,14 +32,12 @@ export const getHot100 = async (req, res) => {
     const email = await helper();
     res.send(email);
   } catch (error) {
-    await transporter.sendMail({
-      from: '"Tongyu Tech" <tongyutest@gmail.com>', // sender address
-      to: "tyelsr@gmail.com", // list of receivers
-      subject: "Error from Tongyu Tech", // Subject line
-      html: error, // html body
-    });
-    console.log(error);
-    res.send(error);
+    const recipients = "tyelsr@gmail.com";
+    const subject = "Error from Tongyu Tech";
+    const email = error;
+    const sentEmail = await sendEmail(recipients, subject, email);
+    console.log(sentEmail);
+    res.send(sentEmail, error);
   }
 };
 
@@ -58,7 +46,7 @@ export const createUser = async (req, res) => {
     const { email } = req.query;
     if (!email) throw new Error();
     else {
-      const createdUser = await createUserService({ email: email });
+      const createdUser = await createUserService(email);
       console.log("New User was Created: ", createdUser);
       res.send(createdUser);
     }

@@ -1,10 +1,8 @@
 import { getHot100Api } from "../Helper/BillboardApi.js";
-export const getHot100Service = async () => {
-  const chart = await getHot100Api();
-  const thisWeek =
-    chart.songs[0].title +
-    chart.songs[0].artist +
-    chart.songs[0].position.weeksOnChart;
+export const getHot100Service = async (date) => {
+  const chart = await getHot100Api(date);
+  console.log(chart);
+  const thisWeek = chart.week;
   let email = chart.songs
     .map((song) => {
       return song.rank + ": " + song.title + " - " + song.artist;
@@ -13,6 +11,6 @@ export const getHot100Service = async () => {
       const element = `<tr><td>${cur}</td></tr>`;
       return acc + element;
     });
-  email = `<table><tr><td>${"Week of " + chart.week}</td></tr>${email}</table>`;
+  email = `<h2>${"Week of " + chart.week}</h2><table>${email}</table>`;
   return { email, thisWeek };
 };
