@@ -10,4 +10,9 @@ router.get("/user", createUser);
 router.get("/subscribe", (req, res) => {
   res.send(getSubscribe());
 });
+router.get("/", (req, res) => {
+  res.send(
+    "Welcome to Apakee! This site is reserved for our official website."
+  );
+});
 export default router;

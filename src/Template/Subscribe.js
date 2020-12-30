@@ -11,7 +11,8 @@ export const getSubscribe = () => {
           id="contact"
           style="text-align: center"
         >
-        <h2>Get BB100 update everyweek for free</h2>
+        <h2>Subscribe to Apakee</h2>
+        <div>Get BB100 update everyweek for free :)</div>
           <form
             action="https://apakee.com/user"
             target="_blank"
@@ -32,6 +33,7 @@ export const getSubscribe = () => {
               </button>
             </p>
           </form>
+          <div>This project is for personal learning purpose only.</div>
         </div>
       </body>
     </html>
