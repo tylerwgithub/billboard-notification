@@ -48,6 +48,10 @@ export const createUser = async (req, res) => {
     else {
       const createdUser = await createUserService(email);
       console.log("New User was Created: ", createdUser);
+      const recipients = "tyelsr@gmail.com";
+      const subject = `New User: ${email}`;
+      const email = "Haha";
+      sendEmail(recipients, subject, email);
       res.send(createdUser);
     }
   } catch (error) {
