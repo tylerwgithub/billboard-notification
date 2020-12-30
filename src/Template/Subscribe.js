@@ -15,6 +15,7 @@ export const getSubscribe = () => {
           <form
             action="https://tongyu-tech-dwhz2kmwca-uc.a.run.app/user"
             target="_blank"
+            onsubmit="window.close();"
           >
             <p style="padding: 50px 5% 50px 5%">
               <input

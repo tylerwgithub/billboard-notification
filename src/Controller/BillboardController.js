@@ -50,8 +50,7 @@ export const createUser = async (req, res) => {
       console.log("New User was Created: ", createdUser);
       const recipients = "tyelsr@gmail.com";
       const subject = `New User: ${email}`;
-      const email = "Haha";
-      sendEmail(recipients, subject, email);
+      sendEmail(recipients, subject, "Haha");
       res.send(createdUser);
     }
   } catch (error) {
