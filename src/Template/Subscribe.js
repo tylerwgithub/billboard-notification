@@ -12,7 +12,7 @@ export const getSubscribe = () => {
           style="text-align: center"
         >
         <h2>Subscribe to Apakee</h2>
-        <div>Get BB100 update everyweek for free :)</div>
+        <div>Get BB Hot100 update everyweek for free :)</div>
           <form
             action="https://apakee.com/user"
             target="_blank"
