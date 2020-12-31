@@ -1,7 +1,6 @@
 export const getChartEmail = (chart) => {
   let email = chart.songs
     .map((song) => {
-      console.log(song.position);
       return (
         "<tr>" +
         `<tr><td style="border: 1px solid #dddddd">${song.rank}</td>` +

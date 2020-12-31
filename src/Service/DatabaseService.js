@@ -1,6 +1,5 @@
 import { getDB } from "../Helper/dbConnection.js";
 const client = getDB();
-console.log(client);
 export const createUserService = async (email) => {
   try {
     if (!client.isConnected()) await client.connect();

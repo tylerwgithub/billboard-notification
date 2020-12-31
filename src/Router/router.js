@@ -15,4 +15,5 @@ router.get("/", (req, res) => {
     "Welcome to Apakee! This site is reserved for our official website."
   );
 });
+
 export default router;
