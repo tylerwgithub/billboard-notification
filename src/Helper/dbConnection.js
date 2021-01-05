@@ -6,11 +6,13 @@ let client = null;
 
 export const getDB = () => {
   try {
-    if (!client)
+    if (!client) {
+      console.log("new db connection created!");
       client = new mongodb.MongoClient(uri, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
       });
+    }
     return client;
   } catch (error) {
     console.log(error);

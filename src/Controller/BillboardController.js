@@ -12,7 +12,7 @@ const helper = async () => {
   const { email, thisWeek } = await getHot100Service(date);
   const isWeekCreated = await createWeekService(thisWeek);
   if (isWeekCreated) {
-    const subject = "Music Feed from Tongyu Tech";
+    const subject = "Music Feed from Apakee";
     const recipients = await getAllEmailsService();
     const sentEmail = await sendEmail(recipients, subject, email);
     console.log(
@@ -33,7 +33,7 @@ export const getHot100 = async (req, res) => {
     res.send(email);
   } catch (error) {
     const recipients = "tyelsr@gmail.com";
-    const subject = "Error from Tongyu Tech";
+    const subject = "Error from Apakee";
     const email = error;
     const sentEmail = await sendEmail(recipients, subject, email);
     console.log(sentEmail);
@@ -52,6 +52,7 @@ export const createUser = async (req, res) => {
           .tz("America/New_York")
           .format("YYYY-MM-DD");
         const chart = await getHot100Service(date);
+        console.log("this is chart", chart);
         const subject =
           "Thanks for your subscription! Here's the chart for current week.";
         sendEmail(email, subject, chart.email);
@@ -85,3 +86,9 @@ const updateChart = async () => {
 };
 // updateChart();
 // setInterval(updateChart, 30 * 60 * 1000);
+// const testdate = moment(new Date()).tz("America/New_York").format("YYYY-MM-DD");
+// const testdate1 = moment(new Date())
+//   .subtract(5, "days")
+//   .tz("America/New_York")
+//   .format("YYYY-MM-DD");
+// console.log(testdate, testdate1);

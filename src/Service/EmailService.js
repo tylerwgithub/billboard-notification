@@ -8,6 +8,7 @@ if (!transporter) {
       pass: "20201230",
     },
   });
+  console.log("new email service created!");
 }
 export const sendEmail = async (recipients, subject, email) => {
   return await transporter.sendMail({
